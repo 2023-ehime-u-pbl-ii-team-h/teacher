@@ -1,0 +1,74 @@
+.container {
+  display: block;
+  min-height: 3.5rem;
+  border-radius: 8px;
+  overflow: hidden;
+  user-select: none;
+  cursor: pointer;
+}
+.container:hover > .state {
+  background: color-mix(in srgb, currentcolor 8%, transparent);
+}
+.container:active > .state,
+.container:focus-visible > .state {
+  background: color-mix(in srgb, currentcolor 10%, transparent);
+}
+
+.state {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 8px;
+  border-radius: 9999px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.labelSet {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.checkbox {
+  margin-right: 8px;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.checkbox > input[type="checkbox"] {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: currentcolor 2px solid;
+  border-radius: 2px;
+}
+.checkbox > input[type="checkbox"]:focus-visible {
+  outline: max(2px, 0.15em) solid currentColor;
+  outline-offset: max(2px, 0.15em);
+}
+
+.checkbox > input[type="checkbox"]::before {
+  background-color: currentcolor;
+  content: "";
+  display: block;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  width: 16px;
+  height: 16px;
+  clip-path: polygon(14% 44%, 0 65%, 40% 90%, 90% 16%, 70% 0%, 33% 52%);
+}
+.checkbox > input[type="checkbox"]:checked::before {
+  transform: scale(0.7);
+}
