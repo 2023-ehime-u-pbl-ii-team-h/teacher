@@ -1,5 +1,5 @@
 import styles from "./page.module.css";
 
-<main>
-
-</main>
+export default function Home(){
+    return <main></main>;
+}
