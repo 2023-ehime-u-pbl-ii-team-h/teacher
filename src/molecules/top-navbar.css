@@ -1,10 +1,20 @@
 .navbar{
-    display: grid;
+    display: flex;
     position: fixed;
     top: 0;
     left: 0;
     height: 4rem;
     padding: 0 1rem;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
+}
+
+.icon{
+    flex-shrink: 0;
+}
+
+.subjectname{
+    flex-grow: 1;
+    flex-shrink: 1;
+    overflow: hidden;
 }
