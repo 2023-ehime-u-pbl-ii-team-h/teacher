@@ -5,9 +5,9 @@ import { AiOutlineUnorderedList } from "react-icons/ai";
 const Navbar = () => {
     return (
         <div className={styles.navbar}>
-            <AiOutlineUnorderedList />
-            <>aa</>
-            <>bb</>
+            <span className={styles.icon}><AiOutlineUnorderedList /></span>
+            <span className={styles.subjectname}>aa</span>
+            <span className={styles.icon}>bb</span>
         </div>
     );
 };
