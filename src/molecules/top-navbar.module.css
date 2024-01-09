@@ -3,6 +3,7 @@
     position: fixed;
     top: 0;
     left: 0;
+    width: 100svw;
     height: 4rem;
     padding: 0 1rem;
     align-items: center;
@@ -14,7 +15,6 @@
 }
 
 .subjectname{
-    flex-grow: 1;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
