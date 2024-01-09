@@ -6,8 +6,8 @@ const Navbar = () => {
     return (
         <div className={styles.navbar}>
             <span className={styles.icon}><AiOutlineUnorderedList /></span>
-            <span className={styles.subjectname}>aa</span>
-            <span className={styles.icon}>bb</span>
+            <span className={styles.subjectname}>科目名</span>
+            <span className={styles.icon}>アバターアイコン</span>
         </div>
     );
 };
