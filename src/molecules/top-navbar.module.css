@@ -19,3 +19,32 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+
+.accountmenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 5px;
+    display: none;
+  }
+  
+  .accountmenu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .accountmenu ul li {
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+  
+  .accountmenu ul li:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .navbar:hover .accountmenu {
+    display: block;
+  }
