@@ -1,21 +1,22 @@
-.navbar{
-    display: flex;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100svw;
-    height: 4rem;
-    padding: 0 1rem;
-    align-items: center;
-    justify-content: space-between;
+.navbar {
+  display: flex;
+  position: sticky;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  width: 100svw;
+  height: 4rem;
+  padding: 0 1rem;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.icon{
-    flex-shrink: 0;
+.icon {
+  flex-shrink: 0;
 }
 
-.subjectname{
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+.subjectname {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }

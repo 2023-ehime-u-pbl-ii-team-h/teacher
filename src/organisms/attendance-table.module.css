@@ -1,0 +1,7 @@
+.table {
+  width: 100%;
+}
+
+.table > tbody > tr:nth-child(odd) {
+  background: color-mix(in srgb, 10% currentcolor, transparent);
+}
