@@ -12,6 +12,8 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@azure/msal-browser": "^3.7.0",
+    "@azure/msal-react": "^2.0.9",
     "next": "13.5.4",
     "react": "^18",
     "react-dom": "^18",
