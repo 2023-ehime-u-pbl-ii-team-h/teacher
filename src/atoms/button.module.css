@@ -24,6 +24,10 @@
   gap: 8px;
 }
 
+.icon {
+  transform: translateY(11.5%);
+}
+
 .fullCorner {
   border-radius: 9999px;
 }

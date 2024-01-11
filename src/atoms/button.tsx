@@ -19,7 +19,7 @@ export function FilledButton({
     >
       <div className={styles.stateLayer}>
         <div className={styles.content}>
-          {leadingIcon && <span>{leadingIcon}</span>}
+          {leadingIcon && <span className={styles.icon}>{leadingIcon}</span>}
           <span className="label-large">{label}</span>
         </div>
       </div>
