@@ -1,23 +1,25 @@
+"use client";
+
 import React, { useState } from "react";
 import styles from "./top-navbar.module.css";
 import { AiOutlineUnorderedList, AiOutlineUser } from "react-icons/ai";
 
 const Navbar = () => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-    const toggleMenu = () => {
-      setIsMenuOpen(!isMenuOpen);
-    };
+    const [isaccountMenuOpen, setIsaccountMenuOpen] = useState(false);
+    const toggleaccountMenu = () => {
+        setIsaccountMenuOpen(!isaccountMenuOpen);
+    }
 
     return (
         <div className={styles.navbar}>
             <span className={styles.icon}><AiOutlineUnorderedList /></span>
             <span className={styles.subjectname}>科目名</span>
-            <span className={styles.icon}><AiOutlineUser onClick={toggleMenu} /></span>
-            {isMenuOpen && (
+            <span className={styles.icon}><AiOutlineUser onClick={toggleaccountMenu} /></span>
+            {isaccountMenuOpen && (
                 <div className="accountmenu">
                     <ul>
-                        <li>menu item</li>
+                        <li>menu item1</li>
+                        <li>menu item2</li>
                     </ul>
                 </div>
             )}
