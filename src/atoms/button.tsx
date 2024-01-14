@@ -33,7 +33,10 @@ export function TextButton({
   label,
 }: ButtonProps): JSX.Element {
   return (
-    <button className={`primary-text ${styles.button}`} onClick={onClick}>
+    <button
+      className={`primary-text ${styles.button} ${styles.fullCorner} `}
+      onClick={onClick}
+    >
       <div className={styles.stateLayer}>
         <div className={styles.content}>
           {leadingIcon && <span className={styles.icon}>{leadingIcon}</span>}
