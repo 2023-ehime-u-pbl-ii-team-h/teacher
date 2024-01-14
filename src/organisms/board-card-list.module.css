@@ -1,0 +1,22 @@
+.cardList {
+  margin: 8px auto;
+  width: min(98svw, 560px);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card {
+  width: 100%;
+  padding: 24px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.formBody {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

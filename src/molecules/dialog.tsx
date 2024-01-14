@@ -34,12 +34,14 @@ export function Dialog({
           <div className={styles.controls}>
             {cancelLabel && (
               <TextButton
-                value="cancel"
+                innerProps={{ value: "cancel", onClick: onCancel }}
                 label={cancelLabel}
-                onClick={onCancel}
               />
             )}
-            <TextButton value="confirm" label={confirmLabel} />
+            <TextButton
+              innerProps={{ value: "confirm" }}
+              label={confirmLabel}
+            />
           </div>
         </form>
       </div>
