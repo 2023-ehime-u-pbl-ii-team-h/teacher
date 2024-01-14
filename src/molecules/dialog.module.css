@@ -16,7 +16,12 @@
   max-width: 560px;
 }
 
+.title {
+  padding-bottom: 16px;
+}
+
 .controls {
+  padding-top: 24px;
   display: flex;
   flex-flow: row-reverse;
 }
