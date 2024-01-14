@@ -46,6 +46,7 @@
   flex-direction: column;
   border-radius: 8px;
   overflow: hidden;
+  cursor: pointer;
 }
 .labels > .stateLayer {
   padding: 8px;

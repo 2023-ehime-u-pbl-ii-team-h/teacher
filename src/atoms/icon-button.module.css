@@ -5,6 +5,7 @@
   height: 48px;
   border-radius: 9999px;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .stateLayer {
