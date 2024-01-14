@@ -2,6 +2,7 @@
   height: 2.5rem;
   border: 0;
   overflow: hidden;
+  background-color: transparent;
   cursor: pointer;
 }
 
@@ -27,6 +28,10 @@
 
 .icon {
   transform: translateY(11.5%);
+}
+
+.filled {
+  background-color: var(--md-sys-color-primary);
 }
 
 .fullCorner {

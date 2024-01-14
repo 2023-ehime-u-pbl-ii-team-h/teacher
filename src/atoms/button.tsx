@@ -15,8 +15,25 @@ export function FilledButton({
   return (
     <button
       onClick={onClick}
-      className={`primary on-primary-text ${styles.button} ${styles.fullCorner} ${styles.hoverElevation}`}
+      className={`on-primary-text ${styles.button} ${styles.filled} ${styles.fullCorner} ${styles.hoverElevation}`}
     >
+      <div className={styles.stateLayer}>
+        <div className={styles.content}>
+          {leadingIcon && <span className={styles.icon}>{leadingIcon}</span>}
+          <span className="label-large">{label}</span>
+        </div>
+      </div>
+    </button>
+  );
+}
+
+export function TextButton({
+  onClick,
+  leadingIcon,
+  label,
+}: ButtonProps): JSX.Element {
+  return (
+    <button className={`primary-text ${styles.button}`} onClick={onClick}>
       <div className={styles.stateLayer}>
         <div className={styles.content}>
           {leadingIcon && <span className={styles.icon}>{leadingIcon}</span>}
