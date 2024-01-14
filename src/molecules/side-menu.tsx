@@ -2,6 +2,9 @@ import { StandardIconButton } from "@/atoms/icon-button";
 import styles from "./side-menu.module.css";
 import { AiOutlineClose, AiOutlineDelete, AiOutlinePlus } from "react-icons/ai";
 import { FilledButton } from "@/atoms/button";
+import { Dialog } from "./dialog";
+import { FormEvent, useState } from "react";
+import { OutlinedTextField } from "@/atoms/text-field";
 
 export type SideMenuProps = {
   title: string;
@@ -26,6 +29,17 @@ export function SideMenu({
       lastOpenDate: "2024-01-12T10:20",
     },
   ];
+
+  const [isOpenDialog, setIsOpenDialog] = useState(false);
+
+  function onSubmitNewSubject(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const input = event.currentTarget.elements.namedItem(
+      "subject_name",
+    ) as HTMLInputElement;
+    console.log(input.value);
+    setIsOpenDialog(false);
+  }
 
   return (
     <>
@@ -61,11 +75,31 @@ export function SideMenu({
             <FilledButton
               label="科目を新規追加"
               leadingIcon={<AiOutlinePlus />}
+              onClick={() => setIsOpenDialog(true)}
             />
           </div>
         </div>
       </div>
       {isOpen && <div className={styles.scrim} onClick={onClose} />}
+      {isOpenDialog && (
+        <Dialog
+          title="科目の新規追加"
+          submitLabel="追加"
+          closeLabel="キャンセル"
+          onCancel={() => setIsOpenDialog(false)}
+          onSubmit={onSubmitNewSubject}
+        >
+          <OutlinedTextField
+            label="科目名"
+            inputProps={{
+              name: "subject_name",
+              type: "text",
+              defaultValue: "",
+              required: true,
+            }}
+          />
+        </Dialog>
+      )}
     </>
   );
 }
