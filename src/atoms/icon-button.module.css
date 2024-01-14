@@ -35,8 +35,10 @@
   opacity: 0;
   position: absolute;
   transition: opacity 0.16s;
+  visibility: hidden;
 }
 .touch:hover + .tooltip,
 .touch:focus-visible + .tooltip {
   opacity: 1;
+  visibility: visible;
 }
