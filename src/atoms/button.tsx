@@ -1,24 +1,21 @@
-import { ReactNode } from "react";
+import { ComponentProps, ReactNode } from "react";
 import styles from "./button.module.css";
 
 export interface ButtonProps {
-  onClick?: () => void;
-  value?: string;
+  innerProps?: ComponentProps<"button">;
   leadingIcon?: ReactNode;
   label: string;
 }
 
 export function FilledButton({
-  onClick,
-  value,
+  innerProps,
   leadingIcon,
   label,
 }: ButtonProps): JSX.Element {
   return (
     <button
+      {...innerProps}
       className={`on-primary-text ${styles.button} ${styles.filled} ${styles.fullCorner} ${styles.hoverElevation}`}
-      onClick={onClick}
-      value={value}
     >
       <div className={styles.stateLayer}>
         <div className={styles.content}>
@@ -31,16 +28,14 @@ export function FilledButton({
 }
 
 export function TextButton({
-  onClick,
-  value,
+  innerProps,
   leadingIcon,
   label,
 }: ButtonProps): JSX.Element {
   return (
     <button
-      className={`primary-text ${styles.button} ${styles.fullCorner} `}
-      onClick={onClick}
-      value={value}
+      {...innerProps}
+      className={`primary-text ${styles.button} ${styles.fullCorner}`}
     >
       <div className={styles.stateLayer}>
         <div className={styles.content}>

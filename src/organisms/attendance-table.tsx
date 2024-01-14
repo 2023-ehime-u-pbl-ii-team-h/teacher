@@ -70,7 +70,9 @@ export function AttendanceTable(): JSX.Element {
                 <TextButton
                   label="編集"
                   leadingIcon={<AiOutlineEdit />}
-                  onClick={() => setEditTarget({ id, createdAt })}
+                  innerProps={{
+                    onClick: () => setEditTarget({ id, createdAt }),
+                  }}
                 />
               </td>
             </tr>

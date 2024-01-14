@@ -75,7 +75,7 @@ export function SideMenu({
             <FilledButton
               label="科目を新規追加"
               leadingIcon={<AiOutlinePlus />}
-              onClick={() => setIsOpenDialog(true)}
+              innerProps={{ onClick: () => setIsOpenDialog(true) }}
             />
           </div>
         </div>
