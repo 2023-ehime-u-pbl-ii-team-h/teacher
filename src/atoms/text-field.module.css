@@ -1,0 +1,55 @@
+.outlined {
+  display: inline-flex;
+  flex-flow: column;
+}
+
+.container {
+  position: relative;
+  display: inline-flex;
+  height: 3.5rem;
+  background-color: transparent;
+}
+
+.field {
+  box-sizing: border-box;
+  background-color: transparent;
+  height: 100%;
+  padding: 8px 16px;
+  border: 1px solid;
+  box-shadow: 0 0 0 1px solid var(--md-sys-color-outline);
+  border-radius: 4px;
+}
+.field:focus,
+.field:autofill {
+  & + .label {
+    color: var(--md-sys-color-primary);
+  }
+}
+.field:focus,
+.field:autofill,
+.field:not(:placeholder-shown) {
+  & + .label {
+    top: 0.3rem;
+    font-weight: 400;
+    font-size: 9pt;
+    line-height: 12pt;
+    letter-spacing: 0.4pt;
+  }
+}
+.field:focus-visible {
+  outline: unset;
+  box-shadow: 0 0 0 2px var(--md-sys-color-primary);
+}
+
+.label {
+  position: absolute;
+  top: 0.75rem;
+  left: 16px;
+  transition:
+    font-size 160ms,
+    top 160ms;
+}
+
+.supporting {
+  margin-left: 16px;
+}
