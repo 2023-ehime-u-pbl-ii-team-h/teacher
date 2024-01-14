@@ -46,10 +46,10 @@ export function SideMenu({
             <div key={id} className={styles.item}>
               <div className={styles.labels}>
                 <div className={styles.stateLayer}>
-                  <span className="body-large">{name}</span>
-                  <span className="body-medium">
+                  <p className="body-large">{name}</p>
+                  <p className="body-medium">
                     {new Date(lastOpenDate).toLocaleString()}
-                  </span>
+                  </p>
                 </div>
               </div>
               <div className={styles.leadingButton}>

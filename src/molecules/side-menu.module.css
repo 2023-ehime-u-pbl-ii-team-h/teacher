@@ -45,14 +45,14 @@
   display: flex;
   flex-direction: column;
   border-radius: 8px;
-  overflow: hidden;
-  text-wrap: whitespace;
-  text-overflow: ellipsis;
 }
 .labels > .stateLayer {
   padding: 8px;
   width: 100%;
   height: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .labels:hover > .stateLayer {
   background: color-mix(in srgb, currentcolor 8%, transparent);
