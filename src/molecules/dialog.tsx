@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { FormEvent, ReactNode } from "react";
 import styles from "./dialog.module.css";
 import { TextButton } from "@/atoms/button";
 
@@ -7,9 +7,10 @@ export type DialogProps = {
   title: string;
   description?: string;
   icon?: ReactNode;
-  confirmLabel: string;
-  cancelLabel?: string;
-  onSubmit: (isConfirmed: boolean) => void;
+  submitLabel: string;
+  closeLabel?: string;
+  onCancel: () => void;
+  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
 };
 
 export function Dialog({
@@ -17,8 +18,9 @@ export function Dialog({
   title,
   description = "",
   icon,
-  confirmLabel,
-  cancelLabel,
+  submitLabel: confirmLabel,
+  closeLabel: cancelLabel,
+  onCancel,
   onSubmit,
 }: DialogProps): JSX.Element {
   return (
@@ -27,21 +29,19 @@ export function Dialog({
         {icon && <div className={styles.leadingIcon}>{icon}</div>}
         <h2 className={styles.title}>{title}</h2>
         {description && <p className={styles.description}>{description}</p>}
-        <div className={styles.body}>{children}</div>
-        <div className={styles.controls}>
-          <TextButton
-            value="confirm"
-            label={confirmLabel}
-            onClick={() => onSubmit(true)}
-          />
-          {cancelLabel && (
-            <TextButton
-              value="cancel"
-              label={cancelLabel}
-              onClick={() => onSubmit(false)}
-            />
-          )}
-        </div>
+        <form onSubmit={onSubmit}>
+          <div className={styles.body}>{children}</div>
+          <div className={styles.controls}>
+            {cancelLabel && (
+              <TextButton
+                value="cancel"
+                label={cancelLabel}
+                onClick={onCancel}
+              />
+            )}
+            <TextButton value="confirm" label={confirmLabel} />
+          </div>
+        </form>
       </div>
     </div>
   );

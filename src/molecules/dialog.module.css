@@ -23,5 +23,5 @@
 .controls {
   padding-top: 24px;
   display: flex;
-  flex-flow: row-reverse;
+  justify-content: flex-end;
 }
