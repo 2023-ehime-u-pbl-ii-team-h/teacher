@@ -3,19 +3,22 @@ import styles from "./button.module.css";
 
 export interface ButtonProps {
   onClick?: () => void;
+  value?: string;
   leadingIcon?: ReactNode;
   label: string;
 }
 
 export function FilledButton({
   onClick,
+  value,
   leadingIcon,
   label,
 }: ButtonProps): JSX.Element {
   return (
     <button
-      onClick={onClick}
       className={`on-primary-text ${styles.button} ${styles.filled} ${styles.fullCorner} ${styles.hoverElevation}`}
+      onClick={onClick}
+      value={value}
     >
       <div className={styles.stateLayer}>
         <div className={styles.content}>
@@ -29,6 +32,7 @@ export function FilledButton({
 
 export function TextButton({
   onClick,
+  value,
   leadingIcon,
   label,
 }: ButtonProps): JSX.Element {
@@ -36,6 +40,7 @@ export function TextButton({
     <button
       className={`primary-text ${styles.button} ${styles.fullCorner} `}
       onClick={onClick}
+      value={value}
     >
       <div className={styles.stateLayer}>
         <div className={styles.content}>
