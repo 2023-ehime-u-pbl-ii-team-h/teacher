@@ -7,9 +7,11 @@ import { Dialog } from "@/molecules/dialog";
 import { FormEvent, useState } from "react";
 import { OutlinedTextField } from "@/atoms/text-field";
 import { useAttendances } from "@/queries/attendances";
+import { useSearchParams } from "next/navigation";
 
 export function AttendanceTable(): JSX.Element {
-  const attendances = useAttendances();
+  const params = useSearchParams();
+  const attendances = useAttendances(params.get("board") ?? "");
   const [editTarget, setEditTarget] = useState<{
     id: string;
     createdAt: Date;

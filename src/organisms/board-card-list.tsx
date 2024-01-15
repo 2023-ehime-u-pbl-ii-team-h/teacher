@@ -6,11 +6,13 @@ import { FormEvent, useState } from "react";
 import { AttendanceBoard, useBoards } from "@/queries/boards";
 import { Dialog } from "@/molecules/dialog";
 import { OutlinedTextField } from "@/atoms/text-field";
+import { useSearchParams } from "next/navigation";
 
 export function BoardCardList() {
   const now = Date.now();
 
-  const boards = useBoards();
+  const params = useSearchParams();
+  const boards = useBoards(params.get("subject") ?? "");
   const [editTarget, setEditTarget] = useState<AttendanceBoard | null>(null);
 
   function onSubmitEditBoard(event: FormEvent<HTMLFormElement>) {
