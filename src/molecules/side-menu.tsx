@@ -5,6 +5,7 @@ import { FilledButton } from "@/atoms/button";
 import { Dialog } from "./dialog";
 import { FormEvent, useState } from "react";
 import { OutlinedTextField } from "@/atoms/text-field";
+import { useSubjects } from "@/queries/subjects";
 
 export type SideMenuProps = {
   title: string;
@@ -17,19 +18,7 @@ export function SideMenu({
   isOpen,
   onClose,
 }: SideMenuProps): JSX.Element {
-  const subjects = [
-    {
-      id: "sub01",
-      name: "Lorem ipsum",
-      lastOpenDate: "2024-01-12T08:30",
-    },
-    {
-      id: "sub02",
-      name: "Lorem ipsum",
-      lastOpenDate: "2024-01-12T10:20",
-    },
-  ];
-
+  const subjects = useSubjects();
   const [isOpenDialog, setIsOpenDialog] = useState(false);
 
   function onSubmitNewSubject(event: FormEvent<HTMLFormElement>) {
@@ -56,14 +45,12 @@ export function SideMenu({
               onClick={onClose}
             />
           </div>
-          {subjects.map(({ id, name, lastOpenDate }) => (
+          {subjects?.map(({ id, name, lastOpenDate }) => (
             <div key={id} className={styles.item}>
               <div className={styles.labels}>
                 <div className={styles.stateLayer}>
                   <p className="body-large">{name}</p>
-                  <p className="body-medium">
-                    {new Date(lastOpenDate).toLocaleString()}
-                  </p>
+                  <p className="body-medium">{lastOpenDate.toLocaleString()}</p>
                 </div>
               </div>
               <div className={styles.leadingButton}>
