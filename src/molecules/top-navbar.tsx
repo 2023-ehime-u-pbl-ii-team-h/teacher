@@ -7,7 +7,7 @@ import { AiOutlineUnorderedList, AiOutlineUser } from "react-icons/ai";
 const Navbar = () => {
     const [isaccountMenuOpen, setIsaccountMenuOpen] = useState(false);
     const toggleaccountMenu = () => {
-        setIsaccountMenuOpen(!isaccountMenuOpen);
+        setIsaccountMenuOpen(flag => !flag);
     }
 
     return (
@@ -16,7 +16,7 @@ const Navbar = () => {
             <span className={styles.subjectname}>科目名</span>
             <span className={styles.icon}><AiOutlineUser onClick={toggleaccountMenu} /></span>
             {isaccountMenuOpen && (
-                <div className="accountmenu">
+                <div className={styles.accountmenu}>
                     <ul>
                         <li>menu item1</li>
                         <li>menu item2</li>
