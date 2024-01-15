@@ -5,7 +5,7 @@ export interface AttendanceBoard {
   secondsFromBeLateToEnd: number;
 }
 
-export const useBoards = (): AttendanceBoard[] | null => {
+export const useBoards = (subjectId: string): AttendanceBoard[] | null => {
   const boards = [
     {
       id: "board01",

@@ -5,7 +5,7 @@ export interface Attendance {
   createdAt: Date;
 }
 
-export function useAttendances(): Attendance[] | null {
+export function useAttendances(boardId: string): Attendance[] | null {
   const attendances = [
     {
       id: "0001",
