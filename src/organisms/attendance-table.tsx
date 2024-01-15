@@ -6,35 +6,10 @@ import { AiOutlineEdit } from "react-icons/ai";
 import { Dialog } from "@/molecules/dialog";
 import { FormEvent, useState } from "react";
 import { OutlinedTextField } from "@/atoms/text-field";
+import { useAttendances } from "@/queries/attendances";
 
 export function AttendanceTable(): JSX.Element {
-  const attendances = [
-    {
-      id: "0001",
-      name: "TEST Student",
-      email: "hoge@example.com",
-      createdAt: new Date("2024-01-11T11:44Z"),
-    },
-    {
-      id: "0002",
-      name: "TEST Student",
-      email: "hoge@example.com",
-      createdAt: new Date("2024-01-11T11:44Z"),
-    },
-    {
-      id: "0003",
-      name: "TEST Student",
-      email: "hoge@example.com",
-      createdAt: new Date("2024-01-11T11:44Z"),
-    },
-    {
-      id: "0004",
-      name: "TEST Student",
-      email: "hoge@example.com",
-      createdAt: new Date("2024-01-11T11:44Z"),
-    },
-  ];
-
+  const attendances = useAttendances();
   const [editTarget, setEditTarget] = useState<{
     id: string;
     createdAt: Date;
@@ -61,7 +36,7 @@ export function AttendanceTable(): JSX.Element {
           </tr>
         </thead>
         <tbody>
-          {attendances.map(({ id, name, email, createdAt }) => (
+          {attendances?.map(({ id, name, email, createdAt }) => (
             <tr className={`label-large ${styles.row}`} key={id}>
               <td>{name}</td>
               <td>{email}</td>
