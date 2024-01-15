@@ -6,10 +6,13 @@ import { AiOutlineUnorderedList, AiOutlineUser } from "react-icons/ai";
 import { SideMenu } from "./side-menu";
 import { StandardIconButton } from "@/atoms/icon-button";
 
-const Navbar = () => {
+export type NavbarProps = {
+  title: string;
+};
+
+export const Navbar = ({ title }: NavbarProps) => {
   const [isOpenSideMenu, setIsOpenSideMenu] = useState(false);
 
-  const title = "科目名";
   return (
     <>
       <SideMenu
@@ -31,5 +34,3 @@ const Navbar = () => {
     </>
   );
 };
-
-export default Navbar;
