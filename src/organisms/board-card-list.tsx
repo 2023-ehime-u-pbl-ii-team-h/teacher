@@ -12,7 +12,9 @@ export function BoardCardList() {
   const now = Date.now();
 
   const params = useSearchParams();
-  const boards = useBoards(params.get("subject") ?? "");
+  const { data: boards } = useBoards({
+    subjectId: params.get("subject") ?? "",
+  });
   const [editTarget, setEditTarget] = useState<AttendanceBoard | null>(null);
 
   function onSubmitEditBoard(event: FormEvent<HTMLFormElement>) {

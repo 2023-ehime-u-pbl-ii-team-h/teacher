@@ -1,3 +1,6 @@
+import useSWR, { Fetcher } from "swr";
+import { API_ROOT } from "./config";
+
 export interface Attendance {
   id: string;
   name: string;
@@ -5,32 +8,33 @@ export interface Attendance {
   createdAt: Date;
 }
 
-export function useAttendances(boardId: string): Attendance[] | null {
-  const attendances = [
-    {
-      id: "0001",
-      name: "TEST Student",
-      email: "hoge@example.com",
-      createdAt: new Date("2024-01-11T11:44Z"),
-    },
-    {
-      id: "0002",
-      name: "TEST Student",
-      email: "hoge@example.com",
-      createdAt: new Date("2024-01-11T11:44Z"),
-    },
-    {
-      id: "0003",
-      name: "TEST Student",
-      email: "hoge@example.com",
-      createdAt: new Date("2024-01-11T11:44Z"),
-    },
-    {
-      id: "0004",
-      name: "TEST Student",
-      email: "hoge@example.com",
-      createdAt: new Date("2024-01-11T11:44Z"),
-    },
-  ];
-  return attendances;
-}
+const fetcher: Fetcher<
+  Attendance[],
+  { subjectId: string; boardId: string }
+> = ({ subjectId, boardId }) =>
+  fetch(`${API_ROOT}/subjects/${subjectId}/boards/${boardId}/attendances`)
+    .then(
+      (res) =>
+        res.json() as Promise<
+          {
+            id: string;
+            created_at: number;
+            who: {
+              id: string;
+              name: string;
+              email: string;
+            };
+          }[]
+        >,
+    )
+    .then((values) =>
+      values.map((value) => ({
+        id: value.id,
+        name: value.who.name,
+        email: value.who.email,
+        createdAt: new Date(value.created_at * 1000),
+      })),
+    );
+
+export const useAttendances = (props: { subjectId: string; boardId: string }) =>
+  useSWR(props, fetcher);
