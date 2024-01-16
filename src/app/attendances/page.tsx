@@ -5,6 +5,7 @@ import { TbDatabaseExport } from "react-icons/tb";
 import { MdOutlineEditCalendar } from "react-icons/md";
 import styles from "./page.module.css";
 import { Metadata } from "next";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "打刻一覧",
@@ -30,7 +31,9 @@ export default function Attendances(): JSX.Element {
     <main>
       <Navbar title="打刻一覧" />
       <Controls />
-      <AttendanceTable />
+      <Suspense fallback={<p>読み込み中…</p>}>
+        <AttendanceTable />
+      </Suspense>
     </main>
   );
 }
