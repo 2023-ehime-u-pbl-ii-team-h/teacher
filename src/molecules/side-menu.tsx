@@ -18,7 +18,7 @@ export function SideMenu({
   isOpen,
   onClose,
 }: SideMenuProps): JSX.Element {
-  const subjects = useSubjects();
+  const { data: subjects } = useSubjects();
   const [isOpenDialog, setIsOpenDialog] = useState(false);
 
   function onSubmitNewSubject(event: FormEvent<HTMLFormElement>) {

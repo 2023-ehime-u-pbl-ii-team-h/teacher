@@ -11,7 +11,10 @@ import { useSearchParams } from "next/navigation";
 
 export function AttendanceTable(): JSX.Element {
   const params = useSearchParams();
-  const attendances = useAttendances(params.get("board") ?? "");
+  const { data: attendances } = useAttendances({
+    subjectId: params.get("subject") ?? "",
+    boardId: params.get("board") ?? "",
+  });
   const [editTarget, setEditTarget] = useState<{
     id: string;
     createdAt: Date;
