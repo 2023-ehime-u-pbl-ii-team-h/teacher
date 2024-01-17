@@ -7,8 +7,8 @@ export interface Subject {
   lastOpenDate: Date;
 }
 
-const fetcher: Fetcher<Subject[], {}> = () =>
-  fetch(`${API_ROOT}/me/subjects/`)
+const fetcher: Fetcher<Subject[], Record<string, never>> = () =>
+  fetch(`${API_ROOT}/me/subjects`)
     .then(
       (res) =>
         res.json() as Promise<
