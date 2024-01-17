@@ -22,6 +22,16 @@
 
 .accountmenu{
     position: absolute;
-    top: 16px;
+    top: 40px;
     right: 16px;
+    background-color: #393336;
+    color: #cdc4c7;
+    min-width: 100px;
+    text-align: center;
+    box-shadow: 5px 5px 5px #000000;
+    padding: 5px 2px;
+}
+
+.accountmenuitem{
+    max-height: 3rem;
 }

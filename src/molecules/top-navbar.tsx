@@ -17,10 +17,8 @@ const Navbar = () => {
             <span className={styles.icon}><AiOutlineUser onClick={toggleaccountMenu} /></span>
             {isaccountMenuOpen && (
                 <div className={styles.accountmenu}>
-                    <ul>
-                        <li>menu item1</li>
-                        <li>menu item2</li>
-                    </ul>
+                    <a className={styles.accountmenuitem}>menu item</a><br></br><br></br>
+                    <button className={styles.accountmenuitem}>ログイン</button>
                 </div>
             )}
         </div>
