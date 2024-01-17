@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./top-navbar.module.css";
 import { AiOutlineUnorderedList, AiOutlineUser } from "react-icons/ai";
 import { SideMenu } from "./side-menu";
 import { StandardIconButton } from "@/atoms/icon-button";
+import { Menu, MenuButton, MenuLabel } from "@/atoms/menu";
 
 export type NavbarProps = {
   title: string;
@@ -13,9 +14,23 @@ export type NavbarProps = {
 export const Navbar = ({ title }: NavbarProps) => {
   const [isOpenSideMenu, setIsOpenSideMenu] = useState(false);
   const [isOpenAccountMenu, setIsOpenAccountMenu] = useState(false);
-  const toggleAccountMenu = () => {
-    setIsOpenAccountMenu((flag) => !flag);
-  };
+  const menuRef = useRef<HTMLUListElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(event.target as HTMLElement)
+      ) {
+        setIsOpenAccountMenu(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <>
@@ -30,21 +45,24 @@ export const Navbar = ({ title }: NavbarProps) => {
           alt="サイドメニューを開く"
           onClick={() => setIsOpenSideMenu(true)}
         />
-        <span className={styles.subjectname}>{title}</span>
-        <span className={styles.icon}>
-          <AiOutlineUser onClick={toggleAccountMenu} />
-        </span>
+        <span className={styles.subjectName}>{title}</span>
+        <StandardIconButton
+          icon={<AiOutlineUser />}
+          alt=""
+          onClick={() => setIsOpenAccountMenu(true)}
+        />
         {isOpenAccountMenu && (
-          <div
-            className={`surface-container on-surface-text label-large ${styles.accountMenu}`}
-          >
-            <div className={styles.accountMenuItem}>menu item</div>
-            <button
-              className={`${styles.accountMenuItem} ${styles.accountMenuButton}`}
-            >
-              ログイン
-            </button>
-          </div>
+          <Menu ref={menuRef}>
+            <MenuLabel>
+              <div>
+                <div className="label-large">TEST Teacher</div>
+                <div className="label-medium">test.teacher@example.com</div>
+              </div>
+            </MenuLabel>
+            <MenuButton>
+              <span>ログイン</span>
+            </MenuButton>
+          </Menu>
         )}
       </div>
     </>
