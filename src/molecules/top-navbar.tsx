@@ -12,6 +12,10 @@ export type NavbarProps = {
 
 export const Navbar = ({ title }: NavbarProps) => {
   const [isOpenSideMenu, setIsOpenSideMenu] = useState(false);
+  const [isOpenAccountMenu, setIsOpenAccountMenu] = useState(false);
+  const toggleAccountMenu = () => {
+    setIsOpenAccountMenu(flag => !flag);
+ }
 
   return (
     <>
@@ -27,9 +31,13 @@ export const Navbar = ({ title }: NavbarProps) => {
           onClick={() => setIsOpenSideMenu(true)}
         />
         <span className={styles.subjectname}>{title}</span>
-        <span className={styles.icon}>
-          <AiOutlineUser />
-        </span>
+        <span className={styles.icon}><AiOutlineUser onClick={toggleAccountMenu} /></span>
+        {isOpenAccountMenu && (
+            <div className={styles.accountmenu}>
+                <a className={styles.accountmenuitem}>menu item</a><br></br><br></br>
+                <button className={styles.accountmenuitem}>ログイン</button>
+            </div>
+        )}
       </div>
     </>
   );
