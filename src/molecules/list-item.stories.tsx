@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { ListItem } from "./list-item";
 
 export default {
-  title: "molecules/top navigation bar",
+  title: "molecules/list item",
   component: ListItem,
 } satisfies Meta<typeof ListItem>;
 
