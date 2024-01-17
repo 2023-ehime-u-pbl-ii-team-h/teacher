@@ -20,3 +20,24 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+
+.accountMenu {
+  position: absolute;
+  top: 40px;
+  right: 16px;
+  min-width: 100px;
+  box-shadow: 5px 5px 5px var(--md-sys-color-shadow);
+  padding: 8px 0px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+}
+
+.accountMenuItem {
+  padding: 0 12px;
+  height: 3rem;
+}
+
+.accountMenuButton {
+  border: 0;
+}
