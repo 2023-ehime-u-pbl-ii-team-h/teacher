@@ -7,7 +7,7 @@ export interface Subject {
   lastOpenDate: Date;
 }
 
-const fetcher: Fetcher<Subject[], {}> = () =>
+const fetcher: Fetcher<Subject[], Record<string, never>> = () =>
   fetch(`${API_ROOT}/me/subjects/`)
     .then(
       (res) =>
