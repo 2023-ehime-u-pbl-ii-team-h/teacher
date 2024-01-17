@@ -25,8 +25,6 @@
     position: absolute;
     top: 40px;
     right: 16px;
-    background-color: var(--md-sys-color-surface-container-highest-dark);
-    color: var(--md-sys-color-on-surface-dark);
     min-width: 100px;
     box-shadow: 5px 5px 5px var(--md-sys-color-shadow-light);
     padding: 8px 12px;
