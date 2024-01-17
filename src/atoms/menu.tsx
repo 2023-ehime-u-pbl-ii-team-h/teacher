@@ -1,17 +1,22 @@
-import { ReactNode } from "react";
+import { ReactNode, Ref, forwardRef } from "react";
 import styles from "./menu.module.css";
 
 export type MenuProps = {
   children: ReactNode;
 };
 
-export const Menu = ({ children }: MenuProps): JSX.Element => (
+const MenuInner = (
+  { children }: MenuProps,
+  ref: Ref<HTMLUListElement>,
+): JSX.Element => (
   <ul
+    ref={ref}
     className={`surface-container on-surface-text label-large ${styles.menu}`}
   >
     {children}
   </ul>
 );
+export const Menu = forwardRef(MenuInner);
 
 export const MenuLabel = ({
   children,
