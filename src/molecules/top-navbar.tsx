@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "./top-navbar.module.css";
 import { AiOutlineUnorderedList, AiOutlineUser } from "react-icons/ai";
 import { SideMenu } from "./side-menu";
@@ -33,9 +33,9 @@ export const Navbar = ({ title }: NavbarProps) => {
         <span className={styles.subjectname}>{title}</span>
         <span className={styles.icon}><AiOutlineUser onClick={toggleAccountMenu} /></span>
         {isOpenAccountMenu && (
-            <div className={styles.accountmenu}>
-                <a className={styles.accountmenuitem}>menu item</a><br></br><br></br>
-                <button className={styles.accountmenuitem}>ログイン</button>
+            <div className={styles.accountMenu}>
+                <a className={styles.accountMenuItem}>menu item</a>
+                <button className={styles.accountMenuItem}>ログイン</button>
             </div>
         )}
       </div>

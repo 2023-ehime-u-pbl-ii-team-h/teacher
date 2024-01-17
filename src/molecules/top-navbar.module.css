@@ -21,18 +21,18 @@
     text-overflow: ellipsis;
 }
 
-.accountmenu{
+.accountMenu{
     position: absolute;
     top: 40px;
     right: 16px;
-    background-color: #393336;
-    color: #cdc4c7;
+    background-color: var(--md-sys-color-surface-container-highest-dark);
+    color: var(--md-sys-color-on-surface-dark);
     min-width: 100px;
-    text-align: center;
-    box-shadow: 5px 5px 5px #000000;
-    padding: 5px 2px;
+    box-shadow: 5px 5px 5px var(--md-sys-color-shadow-light);
+    padding: 8px 12px;
+    border-radius: 4px;
 }
 
-.accountmenuitem{
-    max-height: 3rem;
+.accountMenuItem{
+    height: 3rem;
 }
