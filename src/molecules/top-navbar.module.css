@@ -16,21 +16,26 @@
 }
 
 .subjectname{
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .accountMenu{
-    position: absolute;
-    top: 40px;
-    right: 16px;
-    min-width: 100px;
-    box-shadow: 5px 5px 5px var(--md-sys-color-shadow-light);
-    padding: 8px 12px;
-    border-radius: 4px;
+  position: absolute;
+  top: 40px;
+  right: 16px;
+  min-width: 100px;
+  box-shadow: 5px 5px 5px var(--md-sys-color-shadow);
+  padding: 8px 12px;
+  border-radius: 4px;
 }
 
 .accountMenuItem{
-    height: 3rem;
+  height: 3rem;
+}
+
+.accountMenuButton{
+  height: 3rem;
+  border: 0;
 }

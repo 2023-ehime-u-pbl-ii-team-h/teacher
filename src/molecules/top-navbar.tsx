@@ -34,8 +34,8 @@ export const Navbar = ({ title }: NavbarProps) => {
         <span className={styles.icon}><AiOutlineUser onClick={toggleAccountMenu} /></span>
         {isOpenAccountMenu && (
             <div className={`surface-container on-surface-text ${styles.accountMenu}`}>
-                <a className={styles.accountMenuItem}>menu item</a>
-                <button className={styles.accountMenuItem}>ログイン</button>
+                <div className={styles.accountMenuItem}>menu item</div>
+                <button className={styles.accountMenuButton}>ログイン</button>
             </div>
         )}
       </div>
