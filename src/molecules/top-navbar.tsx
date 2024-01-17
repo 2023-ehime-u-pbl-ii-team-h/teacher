@@ -31,7 +31,7 @@ export const Navbar = ({ title }: NavbarProps) => {
           alt="サイドメニューを開く"
           onClick={() => setIsOpenSideMenu(true)}
         />
-        <span className={styles.subjectname}>{title}</span>
+        <span className={styles.subjectName}>{title}</span>
         <span className={styles.icon}>
           <AiOutlineUser onClick={toggleAccountMenu} />
         </span>
