@@ -6,6 +6,7 @@ import { Dialog } from "./dialog";
 import { FormEvent, useState } from "react";
 import { OutlinedTextField } from "@/atoms/text-field";
 import { useSubjects } from "@/queries/subjects";
+import Link from "next/link";
 
 export type SideMenuProps = {
   title: string;
@@ -47,12 +48,15 @@ export function SideMenu({
           </div>
           {subjects?.map(({ id, name, lastOpenDate }) => (
             <div key={id} className={styles.item}>
-              <div className={styles.labels}>
+              <Link
+                href={`/attendances?subject=${id}`}
+                className={styles.labels}
+              >
                 <div className={styles.stateLayer}>
                   <p className="body-large">{name}</p>
                   <p className="body-medium">{lastOpenDate.toLocaleString()}</p>
                 </div>
-              </div>
+              </Link>
               <div className={styles.leadingButton}>
                 <StandardIconButton icon={<AiOutlineDelete />} alt="削除" />
               </div>
