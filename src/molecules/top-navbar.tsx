@@ -46,9 +46,11 @@ export const Navbar = ({ title }: NavbarProps) => {
           onClick={() => setIsOpenSideMenu(true)}
         />
         <span className={styles.subjectName}>{title}</span>
-        <span className={styles.icon}>
-          <AiOutlineUser onClick={() => setIsOpenAccountMenu(true)} />
-        </span>
+        <StandardIconButton
+          icon={<AiOutlineUser />}
+          alt=""
+          onClick={() => setIsOpenAccountMenu(true)}
+        />
         {isOpenAccountMenu && (
           <Menu ref={menuRef}>
             <MenuLabel>
