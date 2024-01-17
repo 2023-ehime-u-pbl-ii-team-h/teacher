@@ -7,7 +7,10 @@ import { Providers } from "./providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "%s - 出席確認システム - 教員用",
+  title: {
+    template: "%s - 出席確認システム - 教員用",
+    default: "出席確認システム - 教員用",
+  },
   description: "講義の出席状況を確認、修正、提出しましょう。",
 };
 
