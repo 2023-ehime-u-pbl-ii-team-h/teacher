@@ -8,7 +8,7 @@ export interface Subject {
 }
 
 const fetcher: Fetcher<Subject[], Record<string, never>> = () =>
-  fetch(`${API_ROOT}/me/subjects/`)
+  fetch(`${API_ROOT}/me/subjects`)
     .then(
       (res) =>
         res.json() as Promise<
