@@ -14,8 +14,8 @@ export const Navbar = ({ title }: NavbarProps) => {
   const [isOpenSideMenu, setIsOpenSideMenu] = useState(false);
   const [isOpenAccountMenu, setIsOpenAccountMenu] = useState(false);
   const toggleAccountMenu = () => {
-    setIsOpenAccountMenu(flag => !flag);
- }
+    setIsOpenAccountMenu((flag) => !flag);
+  };
 
   return (
     <>
@@ -31,12 +31,20 @@ export const Navbar = ({ title }: NavbarProps) => {
           onClick={() => setIsOpenSideMenu(true)}
         />
         <span className={styles.subjectname}>{title}</span>
-        <span className={styles.icon}><AiOutlineUser onClick={toggleAccountMenu} /></span>
+        <span className={styles.icon}>
+          <AiOutlineUser onClick={toggleAccountMenu} />
+        </span>
         {isOpenAccountMenu && (
-            <div className={`surface-container on-surface-text label-large ${styles.accountMenu}`}>
-                <div className={styles.accountMenuItem}>menu item</div>
-                <button className={`${styles.accountMenuItem} ${styles.accountMenuButton}`}>ログイン</button>
-            </div>
+          <div
+            className={`surface-container on-surface-text label-large ${styles.accountMenu}`}
+          >
+            <div className={styles.accountMenuItem}>menu item</div>
+            <button
+              className={`${styles.accountMenuItem} ${styles.accountMenuButton}`}
+            >
+              ログイン
+            </button>
+          </div>
         )}
       </div>
     </>
