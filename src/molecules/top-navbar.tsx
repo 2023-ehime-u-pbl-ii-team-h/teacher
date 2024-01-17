@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./top-navbar.module.css";
 import { AiOutlineUnorderedList, AiOutlineUser } from "react-icons/ai";
 import { SideMenu } from "./side-menu";
@@ -14,9 +14,23 @@ export type NavbarProps = {
 export const Navbar = ({ title }: NavbarProps) => {
   const [isOpenSideMenu, setIsOpenSideMenu] = useState(false);
   const [isOpenAccountMenu, setIsOpenAccountMenu] = useState(false);
-  const toggleAccountMenu = () => {
-    setIsOpenAccountMenu((flag) => !flag);
-  };
+  const menuRef = useRef<HTMLUListElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(event.target as HTMLElement)
+      ) {
+        setIsOpenAccountMenu(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <>
@@ -33,10 +47,10 @@ export const Navbar = ({ title }: NavbarProps) => {
         />
         <span className={styles.subjectName}>{title}</span>
         <span className={styles.icon}>
-          <AiOutlineUser onClick={toggleAccountMenu} />
+          <AiOutlineUser onClick={() => setIsOpenAccountMenu(true)} />
         </span>
         {isOpenAccountMenu && (
-          <Menu>
+          <Menu ref={menuRef}>
             <MenuLabel>
               <div>
                 <div className="label-large">TEST Teacher</div>
