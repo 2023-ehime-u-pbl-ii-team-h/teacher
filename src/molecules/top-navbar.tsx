@@ -5,6 +5,7 @@ import styles from "./top-navbar.module.css";
 import { AiOutlineUnorderedList, AiOutlineUser } from "react-icons/ai";
 import { SideMenu } from "./side-menu";
 import { StandardIconButton } from "@/atoms/icon-button";
+import { Menu, MenuButton, MenuLabel } from "@/atoms/menu";
 
 export type NavbarProps = {
   title: string;
@@ -35,16 +36,17 @@ export const Navbar = ({ title }: NavbarProps) => {
           <AiOutlineUser onClick={toggleAccountMenu} />
         </span>
         {isOpenAccountMenu && (
-          <div
-            className={`surface-container on-surface-text label-large ${styles.accountMenu}`}
-          >
-            <div className={styles.accountMenuItem}>menu item</div>
-            <button
-              className={`${styles.accountMenuItem} ${styles.accountMenuButton}`}
-            >
-              ログイン
-            </button>
-          </div>
+          <Menu>
+            <MenuLabel>
+              <div>
+                <div className="label-large">TEST Teacher</div>
+                <div className="label-medium">test.teacher@example.com</div>
+              </div>
+            </MenuLabel>
+            <MenuButton>
+              <span>ログイン</span>
+            </MenuButton>
+          </Menu>
         )}
       </div>
     </>
