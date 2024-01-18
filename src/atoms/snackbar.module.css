@@ -1,0 +1,22 @@
+.container {
+  height: 48px;
+  padding: 0 12px 0 16px;
+  border-radius: 4px;
+  box-shadow: 2px 2px 2px var(--md-sys-color-shadow);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.container:hover {
+  box-shadow: 2px 2px 16px var(--md-sys-color-shadow);
+}
+
+.region {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 8px;
+}

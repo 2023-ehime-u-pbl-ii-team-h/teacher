@@ -3,6 +3,7 @@
 import { MsalProvider } from "@azure/msal-react";
 import { Configuration, PublicClientApplication } from "@azure/msal-browser";
 import { ReactNode } from "react";
+import { SnackbarProvider } from "@/atoms/snackbar";
 
 const configuration: Configuration = {
   auth: {
@@ -13,5 +14,7 @@ const configuration: Configuration = {
 const pca = new PublicClientApplication(configuration);
 
 export const Providers = ({ children }: { children: ReactNode }) => (
-  <MsalProvider instance={pca}>{children}</MsalProvider>
+  <MsalProvider instance={pca}>
+    <SnackbarProvider>{children}</SnackbarProvider>
+  </MsalProvider>
 );
