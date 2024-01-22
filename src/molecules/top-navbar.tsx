@@ -6,6 +6,7 @@ import { AiOutlineUnorderedList, AiOutlineUser } from "react-icons/ai";
 import { SideMenu } from "./side-menu";
 import { StandardIconButton } from "@/atoms/icon-button";
 import { Menu, MenuButton, MenuLabel } from "@/atoms/menu";
+import { useLogin } from "@/queries/login";
 
 export type NavbarProps = {
   title: string;
@@ -15,6 +16,7 @@ export const Navbar = ({ title }: NavbarProps) => {
   const [isOpenSideMenu, setIsOpenSideMenu] = useState(false);
   const [isOpenAccountMenu, setIsOpenAccountMenu] = useState(false);
   const menuRef = useRef<HTMLUListElement>(null);
+  const login = useLogin();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -31,6 +33,8 @@ export const Navbar = ({ title }: NavbarProps) => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  //if
 
   return (
     <>
@@ -56,7 +60,7 @@ export const Navbar = ({ title }: NavbarProps) => {
             <MenuLabel>
               <div>
                 <div className="label-large">TEST Teacher</div>
-                <div className="label-medium">test.teacher@example.com</div>
+                <div className="label-medium">{login.data.email}</div>
               </div>
             </MenuLabel>
             <MenuButton>
