@@ -8,13 +8,22 @@ import { FormEvent, useState } from "react";
 import { OutlinedTextField } from "@/atoms/text-field";
 import { useAttendances } from "@/queries/attendances";
 import { useSearchParams } from "next/navigation";
+import { useAccessToken } from "@/queries/access-token";
 
 export function AttendanceTable(): JSX.Element {
   const params = useSearchParams();
-  const { data: attendances } = useAttendances({
-    subjectId: params.get("subject") ?? "",
-    boardId: params.get("board") ?? "",
-  });
+  const accessToken = useAccessToken();
+  const subjectId = params.get("subject");
+  const boardId = params.get("board");
+  const { data: attendances } = useAttendances(
+    accessToken && subjectId && boardId
+      ? {
+          subjectId,
+          boardId,
+          accessToken,
+        }
+      : null,
+  );
   const [editTarget, setEditTarget] = useState<{
     id: string;
     createdAt: Date;

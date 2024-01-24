@@ -8,10 +8,15 @@ export interface AttendanceBoard {
   secondsFromBeLateToEnd: number;
 }
 
-const fetcher: Fetcher<AttendanceBoard[], { subjectId: string }> = ({
-  subjectId,
-}) =>
-  fetch(`${API_ROOT}/subjects/${subjectId}`)
+const fetcher: Fetcher<
+  AttendanceBoard[],
+  { accessToken: string; subjectId: string }
+> = ({ accessToken, subjectId }) =>
+  fetch(`${API_ROOT}/subjects/${subjectId}`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  })
     .then(
       (res) =>
         res.json() as Promise<
@@ -30,5 +35,6 @@ const fetcher: Fetcher<AttendanceBoard[], { subjectId: string }> = ({
       })),
     );
 
-export const useBoards = (props: { subjectId: string }) =>
-  useSWR(props, fetcher);
+export const useBoards = (
+  props: { subjectId: string; accessToken: string } | null,
+) => useSWR(props, fetcher);

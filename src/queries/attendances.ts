@@ -10,9 +10,13 @@ export interface Attendance {
 
 const fetcher: Fetcher<
   Attendance[],
-  { subjectId: string; boardId: string }
-> = ({ subjectId, boardId }) =>
-  fetch(`${API_ROOT}/subjects/${subjectId}/boards/${boardId}/attendances`)
+  { subjectId: string; boardId: string; accessToken: string }
+> = ({ subjectId, boardId, accessToken }) =>
+  fetch(`${API_ROOT}/subjects/${subjectId}/boards/${boardId}/attendances`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  })
     .then(
       (res) =>
         res.json() as Promise<
@@ -36,5 +40,10 @@ const fetcher: Fetcher<
       })),
     );
 
-export const useAttendances = (props: { subjectId: string; boardId: string }) =>
-  useSWR(props, fetcher);
+export const useAttendances = (
+  props: {
+    subjectId: string;
+    boardId: string;
+    accessToken: string;
+  } | null,
+) => useSWR(props, fetcher);

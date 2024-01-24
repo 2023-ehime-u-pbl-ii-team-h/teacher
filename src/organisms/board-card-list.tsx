@@ -7,14 +7,22 @@ import { AttendanceBoard, useBoards } from "@/queries/boards";
 import { Dialog } from "@/molecules/dialog";
 import { OutlinedTextField } from "@/atoms/text-field";
 import { useSearchParams } from "next/navigation";
+import { useAccessToken } from "@/queries/access-token";
 
 export function BoardCardList() {
   const now = Date.now();
 
   const params = useSearchParams();
-  const { data: boards } = useBoards({
-    subjectId: params.get("subject") ?? "",
-  });
+  const subjectId = params.get("subject");
+  const accessToken = useAccessToken();
+  const { data: boards } = useBoards(
+    accessToken && subjectId
+      ? {
+          subjectId,
+          accessToken,
+        }
+      : null,
+  );
   const [editTarget, setEditTarget] = useState<AttendanceBoard | null>(null);
 
   function onSubmitEditBoard(event: FormEvent<HTMLFormElement>) {

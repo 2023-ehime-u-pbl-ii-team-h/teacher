@@ -7,6 +7,7 @@ import { FormEvent, useState } from "react";
 import { OutlinedTextField } from "@/atoms/text-field";
 import { useSubjects } from "@/queries/subjects";
 import Link from "next/link";
+import { useAccessToken } from "@/queries/access-token";
 
 export type SideMenuProps = {
   title: string;
@@ -19,7 +20,8 @@ export function SideMenu({
   isOpen,
   onClose,
 }: SideMenuProps): JSX.Element {
-  const { data: subjects } = useSubjects();
+  const accessToken = useAccessToken();
+  const { data: subjects } = useSubjects(accessToken ? { accessToken } : null);
   const [isOpenDialog, setIsOpenDialog] = useState(false);
 
   function onSubmitNewSubject(event: FormEvent<HTMLFormElement>) {

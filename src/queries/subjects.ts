@@ -13,8 +13,14 @@ export interface Subject {
   }[];
 }
 
-const fetcher: Fetcher<Subject[], Record<string, never>> = () =>
-  fetch(`${API_ROOT}/me/subjects`).then(
+const fetcher: Fetcher<Subject[], { accessToken: string }> = ({
+  accessToken,
+}) =>
+  fetch(`${API_ROOT}/me/subjects`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  }).then(
     (res) =>
       res.json() as Promise<
         {
@@ -31,4 +37,5 @@ const fetcher: Fetcher<Subject[], Record<string, never>> = () =>
       >,
   );
 
-export const useSubjects = () => useSWR({}, fetcher);
+export const useSubjects = (props: { accessToken: string } | null) =>
+  useSWR(props, fetcher);
