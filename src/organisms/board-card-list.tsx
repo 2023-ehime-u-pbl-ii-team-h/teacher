@@ -3,7 +3,7 @@
 import { TextButton } from "@/atoms/button";
 import styles from "./board-card-list.module.css";
 import { FormEvent, useState } from "react";
-import { AttendanceBoard, useBoards } from "@/queries/boards";
+import { AttendanceBoards, useBoards } from "@/queries/boards";
 import { Dialog } from "@/molecules/dialog";
 import { OutlinedTextField } from "@/atoms/text-field";
 import { useSearchParams } from "next/navigation";
@@ -23,7 +23,9 @@ export function BoardCardList() {
         }
       : null,
   );
-  const [editTarget, setEditTarget] = useState<AttendanceBoard | null>(null);
+  const [editTarget, setEditTarget] = useState<AttendanceBoards[number] | null>(
+    null,
+  );
 
   function onSubmitEditBoard(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -57,7 +59,7 @@ export function BoardCardList() {
                 <TextButton
                   label="編集"
                   innerProps={{
-                    disabled: startFrom.valueOf() <= now,
+                    disabled: new Date(startFrom).valueOf() <= now,
                     onClick: () => setEditTarget(board),
                   }}
                 />
@@ -82,7 +84,9 @@ export function BoardCardList() {
               inputProps={{
                 type: "datetime-local",
                 name: "start_from",
-                defaultValue: editTarget.startFrom.toISOString().slice(0, 16),
+                defaultValue: new Date(editTarget.startFrom)
+                  .toISOString()
+                  .slice(0, 16),
               }}
             />
             <OutlinedTextField

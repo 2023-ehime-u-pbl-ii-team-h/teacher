@@ -6,50 +6,33 @@ import { TbDatabaseExport } from "react-icons/tb";
 import styles from "./attendance-controls.module.css";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { API_ROOT } from "@/queries/config";
-import { Attendance } from "@/queries/attendances";
+import { useAttendances } from "@/queries/attendances";
 import { exportCsv } from "@/commands/export-csv";
 import { useContext } from "react";
 import { SnackbarContext } from "@/atoms/snackbar";
+import { useAccessToken } from "@/queries/access-token";
 
 export function AttendanceControls(): JSX.Element {
   const params = useSearchParams();
+  const subjectId = params.get("subject");
+  const boardId = params.get("board");
   const snackbar = useContext(SnackbarContext);
+  const accessToken = useAccessToken();
+  const { data: attendances } = useAttendances(
+    accessToken && subjectId && boardId
+      ? {
+          subjectId,
+          boardId,
+          accessToken,
+        }
+      : null,
+  );
 
   async function onExport() {
-    let body;
-    try {
-      const res = await fetch(
-        `${API_ROOT}/subjects/${params.get("subject")}/boards/${params.get(
-          "board",
-        )}/attendances`,
-      );
-      if (!res.ok) {
-        console.error(await res.text());
-        return;
-      }
-      body = (await res.json()) as {
-        id: string;
-        created_at: number;
-        who: {
-          id: string;
-          name: string;
-          email: string;
-        };
-      }[];
-    } catch (error) {
+    if (!attendances) {
       snackbar.push("エクスポートに失敗しました");
-      console.error(error);
       return;
     }
-    const attendances = body.map(
-      ({ id, created_at, who: { name, email } }): Attendance => ({
-        id,
-        createdAt: new Date(created_at * 1000),
-        name,
-        email,
-      }),
-    );
     exportCsv(attendances);
   }
 

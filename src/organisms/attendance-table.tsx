@@ -50,17 +50,21 @@ export function AttendanceTable(): JSX.Element {
           </tr>
         </thead>
         <tbody>
-          {attendances?.map(({ id, name, email, createdAt }) => (
+          {attendances?.map(({ id, who: { name, email }, created_at }) => (
             <tr className={`label-large ${styles.row}`} key={id}>
               <td>{name}</td>
               <td>{email}</td>
-              <td>{createdAt.toLocaleString()}</td>
+              <td>{new Date(created_at * 1000).toLocaleString()}</td>
               <td>
                 <TextButton
                   label="編集"
                   leadingIcon={<AiOutlineEdit />}
                   innerProps={{
-                    onClick: () => setEditTarget({ id, createdAt }),
+                    onClick: () =>
+                      setEditTarget({
+                        id,
+                        createdAt: new Date(created_at * 1000),
+                      }),
                   }}
                 />
               </td>

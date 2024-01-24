@@ -1,9 +1,9 @@
-import type { Attendance } from "@/queries/attendances";
+import type { Attendances } from "@/queries/attendances";
 
-export function exportCsv(attendances: readonly Attendance[]) {
+export function exportCsv(attendances: Attendances) {
   const rows = attendances
-    .map(({ id, name, email, createdAt }) =>
-      [id, name, email, createdAt.toISOString()].join(","),
+    .map(({ id, who: { name, email }, created_at }) =>
+      [id, name, email, new Date(created_at * 1000).toISOString()].join(","),
     )
     .join("\n");
   const csv = `ID,名前,メールアドレス,時刻\n${rows}\n`;
