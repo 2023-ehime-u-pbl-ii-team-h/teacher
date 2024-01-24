@@ -1,1 +1,1 @@
-export const API_ROOT = "https://staging.backend.mikuroxina.workers.dev";
+export const API_ROOT = "https://backend-staging.mikuroxina.workers.dev";
