@@ -8,15 +8,15 @@ export type MenuProps = {
 
 const MenuInner = (
   { isOpen, children }: MenuProps,
-  ref: Ref<HTMLUListElement>,
+  ref: Ref<HTMLDivElement>,
 ): JSX.Element => (
-  <ul
+  <div
     ref={ref}
     className={`surface-container on-surface-text label-large ${styles.menu}`}
     data-open={isOpen}
   >
     {children}
-  </ul>
+  </div>
 );
 export const Menu = forwardRef(MenuInner);
 
@@ -24,7 +24,7 @@ export const MenuLabel = ({
   children,
 }: {
   children: ReactNode;
-}): JSX.Element => <li className={styles.label}>{children}</li>;
+}): JSX.Element => <div className={styles.label}>{children}</div>;
 
 export const MenuButton = ({
   onClick,
@@ -33,8 +33,8 @@ export const MenuButton = ({
   onClick?: () => void;
   children: ReactNode;
 }): JSX.Element => (
-  <li className={styles.button} onClick={onClick}>
-    <div className={styles.stateLayer}></div>
+  <div className={styles.button} onClick={onClick}>
+    <span className={styles.stateLayer}></span>
     {children}
-  </li>
+  </div>
 );
