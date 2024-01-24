@@ -18,11 +18,10 @@ export function StandardIconButton({
   return (
     <div>
       <button className={styles.touch} disabled={disabled} onClick={onClick}>
-        <div className={styles.stateLayer}>
-          <div className={styles.icon} aria-label={alt}>
-            {icon}
-          </div>
-        </div>
+        <span className={styles.stateLayer}></span>
+        <span className={styles.icon} aria-label={alt}>
+          {icon}
+        </span>
       </button>
       {alt !== "" && (
         <div className={styles.tooltip}>
