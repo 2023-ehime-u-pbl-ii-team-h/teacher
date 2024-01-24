@@ -5,7 +5,7 @@ import { FilledButton } from "@/atoms/button";
 import { Dialog } from "./dialog";
 import { FormEvent, useState } from "react";
 import { OutlinedTextField } from "@/atoms/text-field";
-import { useSubjects } from "@/queries/subjects";
+import { Subject, useSubjects } from "@/queries/subjects";
 import Link from "next/link";
 import { useAccessToken } from "@/queries/access-token";
 
@@ -14,6 +14,28 @@ export type SideMenuProps = {
   isOpen: boolean;
   onClose: () => void;
 };
+
+const SubjectMenuItem = ({
+  subject: { id, name, boards },
+}: {
+  subject: Subject;
+}) => (
+  <div className={styles.item}>
+    <Link href={`/attendances?subject=${id}`} className={styles.labels}>
+      <div className={styles.stateLayer}>
+        <p className="body-large">{name}</p>
+        {boards.length !== 0 && (
+          <p className="body-medium">
+            {new Date(boards[0].startFrom).toLocaleString()}
+          </p>
+        )}
+      </div>
+    </Link>
+    <div className={styles.leadingButton}>
+      <StandardIconButton icon={<AiOutlineDelete />} alt="削除" />
+    </div>
+  </div>
+);
 
 export function SideMenu({
   title,
@@ -48,23 +70,8 @@ export function SideMenu({
               onClick={onClose}
             />
           </div>
-          {subjects?.map(({ id, name, boards }) => (
-            <div key={id} className={styles.item}>
-              <Link
-                href={`/attendances?subject=${id}`}
-                className={styles.labels}
-              >
-                <div className={styles.stateLayer}>
-                  <p className="body-large">{name}</p>
-                  <p className="body-medium">
-                    {new Date(boards[0].startFrom).toLocaleString()}
-                  </p>
-                </div>
-              </Link>
-              <div className={styles.leadingButton}>
-                <StandardIconButton icon={<AiOutlineDelete />} alt="削除" />
-              </div>
-            </div>
+          {subjects?.map((subject) => (
+            <SubjectMenuItem key={subject.id} subject={subject} />
           ))}
           <div className={styles.footer}>
             <FilledButton
