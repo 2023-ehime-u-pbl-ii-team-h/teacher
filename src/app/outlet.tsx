@@ -20,7 +20,6 @@ export function Outlet({ title, children }: OutletProps): JSX.Element {
     acquireToken,
   } = useMsalAuthentication(InteractionType.Redirect, {
     scopes: ["User.Read"],
-    redirectUri: new URL("/", location.href).toString(),
   });
   const account = useAccount(result?.account ?? {});
   const [isOpenSideMenu, setIsOpenSideMenu] = useState(false);
