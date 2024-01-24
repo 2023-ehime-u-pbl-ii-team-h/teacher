@@ -8,6 +8,8 @@ import { OutlinedTextField } from "@/atoms/text-field";
 import { Subject, useSubjects } from "@/queries/subjects";
 import Link from "next/link";
 import { useAccessToken } from "@/queries/access-token";
+import { useMe } from "@/queries/me";
+import { postSubject } from "@/commands/post-subject";
 
 export type SideMenuProps = {
   title: string;
@@ -43,15 +45,20 @@ export function SideMenu({
   onClose,
 }: SideMenuProps): JSX.Element {
   const accessToken = useAccessToken();
+  const { data: me } = useMe(accessToken ? { accessToken } : null);
   const { data: subjects } = useSubjects(accessToken ? { accessToken } : null);
   const [isOpenDialog, setIsOpenDialog] = useState(false);
 
   function onSubmitNewSubject(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (!accessToken || !me) {
+      return;
+    }
+
     const input = event.currentTarget.elements.namedItem(
       "subject_name",
     ) as HTMLInputElement;
-    console.log(input.value);
+    postSubject(me.id, input.value, accessToken).catch(console.error);
     setIsOpenDialog(false);
   }
 
