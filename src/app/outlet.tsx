@@ -1,6 +1,5 @@
 "use client";
 
-import { logoutAndReload } from "@/commands/logout";
 import { AccountMenu } from "@/molecules/account-menu";
 import { SideMenu } from "@/molecules/side-menu";
 import { Navbar } from "@/molecules/top-navbar";
@@ -18,9 +17,10 @@ export function Outlet({ title, children }: OutletProps): JSX.Element {
     InteractionType.Redirect,
     {
       scopes: ["User.Read"],
+      prompt: "select_account",
     },
   );
-  const { accounts } = useMsal();
+  const { instance, accounts } = useMsal();
   const account = useAccount(accounts[0] ?? {});
   const [isOpenSideMenu, setIsOpenSideMenu] = useState(false);
   const [isOpenAccountMenu, setIsOpenAccountMenu] = useState(false);
@@ -47,7 +47,7 @@ export function Outlet({ title, children }: OutletProps): JSX.Element {
     if (!tokenRes) {
       return;
     }
-    await logoutAndReload(tokenRes.accessToken);
+    await instance.logout();
   };
 
   return (
