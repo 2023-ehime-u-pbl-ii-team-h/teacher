@@ -7,7 +7,7 @@ import { SideMenu } from "./side-menu";
 import { StandardIconButton } from "@/atoms/icon-button";
 import { Menu, MenuButton, MenuLabel } from "@/atoms/menu";
 import { useLogin } from "@/queries/login";
-import { login } from "@/commands/login";
+import { login as loginAction } from "@/commands/login";
 import { logoutAndReload } from "@/commands/logout";
 
 export type NavbarProps = {
@@ -97,7 +97,7 @@ export const Navbar = ({ title }: NavbarProps) => {
               <MenuLabel>
                 <div>ログインしていません</div>
               </MenuLabel>
-              <MenuButton onClick={login}>
+              <MenuButton onClick={loginAction}>
                 <span>ログイン</span>
               </MenuButton>
             </Menu>
