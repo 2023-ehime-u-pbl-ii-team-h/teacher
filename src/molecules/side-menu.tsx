@@ -5,7 +5,7 @@ import { FilledButton } from "@/atoms/button";
 import { Dialog } from "./dialog";
 import { FormEvent, useState } from "react";
 import { OutlinedTextField } from "@/atoms/text-field";
-import { Subject, useSubjects } from "@/queries/subjects";
+import { Subjects, useSubjects } from "@/queries/subjects";
 import Link from "next/link";
 import { useAccessToken } from "@/queries/access-token";
 import { useMe } from "@/queries/me";
@@ -20,16 +20,16 @@ export type SideMenuProps = {
 const SubjectMenuItem = ({
   subject: { id, name, boards },
 }: {
-  subject: Subject;
+  subject: Subjects[number];
 }) => (
   <div className={styles.item}>
     <Link href={`/attendances?subject=${id}`} className={styles.labels}>
       <div className={styles.stateLayer}>
-        <p className="body-large">{name}</p>
+        <span className="body-large">{name}</span>
         {boards.length !== 0 && (
-          <p className="body-medium">
+          <span className="body-medium">
             {new Date(boards[0].startFrom).toLocaleString()}
-          </p>
+          </span>
         )}
       </div>
     </Link>
@@ -80,7 +80,7 @@ export function SideMenu({
           <div className={styles.item}>
             <Link href="/" className={styles.labels}>
               <div className={styles.stateLayer}>
-                <p className="body-large">ホーム</p>
+                <span className="body-large">ホーム</span>
               </div>
             </Link>
           </div>
