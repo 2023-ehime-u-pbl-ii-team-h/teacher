@@ -5,7 +5,8 @@ export type Account = {
   id: string;
   name: string;
   email: string;
-  charges: string[];
+  role: "STUDENT" | "TEACHER";
+  subscriptions: string[];
 };
 
 export const useMe = (props: { accessToken: string } | null) =>
