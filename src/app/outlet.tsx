@@ -1,12 +1,12 @@
 "use client";
 
-import { Menu, MenuButton, MenuLabel } from "@/atoms/menu";
 import { logoutAndReload } from "@/commands/logout";
+import { AccountMenu } from "@/molecules/account-menu";
 import { SideMenu } from "@/molecules/side-menu";
 import { Navbar } from "@/molecules/top-navbar";
 import { InteractionType } from "@azure/msal-browser";
 import { useAccount, useMsal, useMsalAuthentication } from "@azure/msal-react";
-import { ReactNode, useEffect, useRef, useState } from "react";
+import { ReactNode, useState } from "react";
 
 export type OutletProps = {
   title: string;
@@ -14,34 +14,16 @@ export type OutletProps = {
 };
 
 export function Outlet({ title, children }: OutletProps): JSX.Element {
-  const {
-    result,
-    login: reLogin,
-    acquireToken,
-  } = useMsalAuthentication(InteractionType.Redirect, {
-    scopes: ["User.Read"],
-  });
+  const { login: reLogin, acquireToken } = useMsalAuthentication(
+    InteractionType.Redirect,
+    {
+      scopes: ["User.Read"],
+    },
+  );
   const { accounts } = useMsal();
   const account = useAccount(accounts[0] ?? {});
   const [isOpenSideMenu, setIsOpenSideMenu] = useState(false);
   const [isOpenAccountMenu, setIsOpenAccountMenu] = useState(false);
-  const menuRef = useRef<HTMLUListElement>(null);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        menuRef.current &&
-        !menuRef.current.contains(event.target as HTMLElement)
-      ) {
-        setIsOpenAccountMenu(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
 
   const login = async () => {
     if (account) {
@@ -68,29 +50,6 @@ export function Outlet({ title, children }: OutletProps): JSX.Element {
     await logoutAndReload(tokenRes.accessToken);
   };
 
-  const accountMenu = account ? (
-    <Menu isOpen={isOpenAccountMenu} ref={menuRef}>
-      <MenuLabel>
-        <div>
-          <div className="label-large">{account.name}</div>
-          <div className="label-medium">{account.username}</div>
-        </div>
-      </MenuLabel>
-      <MenuButton onClick={logout}>
-        <span>ログアウト</span>
-      </MenuButton>
-    </Menu>
-  ) : (
-    <Menu isOpen={isOpenAccountMenu} ref={menuRef}>
-      <MenuLabel>
-        <div>ログインしていません</div>
-      </MenuLabel>
-      <MenuButton onClick={login}>
-        <span>ログイン</span>
-      </MenuButton>
-    </Menu>
-  );
-
   return (
     <main>
       <Navbar
@@ -99,7 +58,13 @@ export function Outlet({ title, children }: OutletProps): JSX.Element {
         onClickAccountMenuIcon={() => setIsOpenAccountMenu(true)}
       />
       {children}
-      {accountMenu}
+      <AccountMenu
+        account={account}
+        isOpen={isOpenAccountMenu}
+        onClose={() => setIsOpenAccountMenu(false)}
+        onLogin={login}
+        onLogout={logout}
+      />
       <SideMenu
         title={title}
         isOpen={isOpenSideMenu}
