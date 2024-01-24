@@ -17,12 +17,11 @@ export function ExtendedFAB({
       {...innerProps}
       className={`primary-container on-primary-container-text ${styles.button}`}
     >
-      <div className={styles.stateLayer}>
-        <div className={styles.content}>
-          {leadingIcon && <span className={styles.icon}>{leadingIcon}</span>}
-          <span className="label-large">{label}</span>
-        </div>
-      </div>
+      <span className={styles.stateLayer}></span>
+      <span className={styles.content}>
+        {leadingIcon && <span className={styles.icon}>{leadingIcon}</span>}
+        <span className="label-large">{label}</span>
+      </span>
     </button>
   );
 }

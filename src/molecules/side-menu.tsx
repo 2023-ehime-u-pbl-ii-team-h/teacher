@@ -35,7 +35,7 @@ export function SideMenu({
     <>
       <div
         className={`surface on-surface-text ${styles.container}`}
-        data-is-open={isOpen}
+        data-open={isOpen}
       >
         <div className={styles.items}>
           <div className={styles.header}>
@@ -46,7 +46,7 @@ export function SideMenu({
               onClick={onClose}
             />
           </div>
-          {subjects?.map(({ id, name, lastOpenDate }) => (
+          {subjects?.map(({ id, name, boards }) => (
             <div key={id} className={styles.item}>
               <Link
                 href={`/attendances?subject=${id}`}
@@ -54,7 +54,9 @@ export function SideMenu({
               >
                 <div className={styles.stateLayer}>
                   <p className="body-large">{name}</p>
-                  <p className="body-medium">{lastOpenDate.toLocaleString()}</p>
+                  <p className="body-medium">
+                    {new Date(boards[0].startFrom).toLocaleString()}
+                  </p>
                 </div>
               </Link>
               <div className={styles.leadingButton}>
@@ -71,7 +73,7 @@ export function SideMenu({
           </div>
         </div>
       </div>
-      {isOpen && <div className={styles.scrim} onClick={onClose} />}
+      <div className={styles.scrim} onClick={onClose} data-open={isOpen} />
       {isOpenDialog && (
         <Dialog
           title="科目の新規追加"

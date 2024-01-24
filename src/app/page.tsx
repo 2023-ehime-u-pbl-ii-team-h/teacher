@@ -1,10 +1,10 @@
-import styles from "./page.module.css";
-import { Navbar } from "../molecules/top-navbar";
+import { HomeNavigation } from "@/molecules/home-navigation";
+import { Outlet } from "./outlet";
 
 export default function Home() {
   return (
-    <main className={styles.main}>
-      <Navbar title="ホーム" />
-    </main>
+    <Outlet title="ホーム">
+      <HomeNavigation />
+    </Outlet>
   );
 }

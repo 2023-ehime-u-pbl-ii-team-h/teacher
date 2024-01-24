@@ -2,16 +2,18 @@ import { ReactNode, Ref, forwardRef } from "react";
 import styles from "./menu.module.css";
 
 export type MenuProps = {
+  isOpen: boolean;
   children: ReactNode;
 };
 
 const MenuInner = (
-  { children }: MenuProps,
+  { isOpen, children }: MenuProps,
   ref: Ref<HTMLUListElement>,
 ): JSX.Element => (
   <ul
     ref={ref}
     className={`surface-container on-surface-text label-large ${styles.menu}`}
+    data-open={isOpen}
   >
     {children}
   </ul>
