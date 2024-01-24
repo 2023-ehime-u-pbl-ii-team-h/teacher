@@ -9,6 +9,7 @@
   display: flex;
   flex-direction: column;
   list-style: none;
+  z-index: 15;
   visibility: hidden;
 }
 .menu[data-open="true"] {
