@@ -8,6 +8,6 @@ export const fetcher: Fetcher<any, [path: string, accessToken: string]> = ([
 ]) =>
   fetch(API_ROOT + path, {
     headers: {
-      Authorization: accessToken,
+      Authorization: `Bearer ${accessToken}`,
     },
   }).then((res) => res.json());
