@@ -1,8 +1,8 @@
-const BACKEND_LOGOUT_ENDPOINT = "https://backend.mikuroxina.workers.dev/logout";
+import { API_ROOT } from "@/queries/config";
 
 export const logoutAndReload = async (accessToken: string) => {
   try {
-    const response = await fetch(BACKEND_LOGOUT_ENDPOINT, {
+    const response = await fetch(`${API_ROOT}/logout`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
