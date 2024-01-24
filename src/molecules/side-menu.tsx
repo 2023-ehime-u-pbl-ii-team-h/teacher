@@ -35,7 +35,7 @@ export function SideMenu({
     <>
       <div
         className={`surface on-surface-text ${styles.container}`}
-        data-is-open={isOpen}
+        data-open={isOpen}
       >
         <div className={styles.items}>
           <div className={styles.header}>
@@ -73,7 +73,7 @@ export function SideMenu({
           </div>
         </div>
       </div>
-      {isOpen && <div className={styles.scrim} onClick={onClose} />}
+      <div className={styles.scrim} onClick={onClose} data-open={isOpen} />
       {isOpenDialog && (
         <Dialog
           title="科目の新規追加"

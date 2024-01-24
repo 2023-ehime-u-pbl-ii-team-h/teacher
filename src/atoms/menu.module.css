@@ -9,6 +9,10 @@
   display: flex;
   flex-direction: column;
   list-style: none;
+  visibility: hidden;
+}
+.menu[data-open="true"] {
+  visibility: visible;
 }
 .menu > * {
   padding: 0 12px;
