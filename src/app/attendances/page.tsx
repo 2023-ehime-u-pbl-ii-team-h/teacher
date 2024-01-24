@@ -10,11 +10,11 @@ export const metadata: Metadata = {
 
 export default function Attendances(): JSX.Element {
   return (
-    <Outlet title="打刻一覧">
-      <Suspense fallback={<p>読み込み中…</p>}>
+    <Suspense fallback={<p>読み込み中…</p>}>
+      <Outlet title="打刻一覧">
         <AttendanceControls />
         <AttendanceTable />
-      </Suspense>
-    </Outlet>
+      </Outlet>
+    </Suspense>
   );
 }

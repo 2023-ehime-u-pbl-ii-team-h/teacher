@@ -13,13 +13,16 @@ export const metadata: Metadata = {
 
 export default function BoardsPage(): JSX.Element {
   return (
-    <Outlet title="出席申請受付一覧">
-      <Suspense fallback={<p>読み込み中…</p>}>
+    <Suspense fallback={<p>読み込み中…</p>}>
+      <Outlet title="出席申請受付一覧">
         <BoardCardList />
-      </Suspense>
-      <Link href="/boards/new">
-        <ExtendedFAB label="新規出席申請受付" leadingIcon={<AiOutlinePlus />} />
-      </Link>
-    </Outlet>
+        <Link href="/boards/new">
+          <ExtendedFAB
+            label="新規出席申請受付"
+            leadingIcon={<AiOutlinePlus />}
+          />
+        </Link>
+      </Outlet>
+    </Suspense>
   );
 }
