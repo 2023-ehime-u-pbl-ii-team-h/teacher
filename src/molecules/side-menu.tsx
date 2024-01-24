@@ -70,6 +70,13 @@ export function SideMenu({
               onClick={onClose}
             />
           </div>
+          <div className={styles.item}>
+            <Link href="/" className={styles.labels}>
+              <div className={styles.stateLayer}>
+                <p className="body-large">ホーム</p>
+              </div>
+            </Link>
+          </div>
           {subjects?.map((subject) => (
             <SubjectMenuItem key={subject.id} subject={subject} />
           ))}
