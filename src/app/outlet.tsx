@@ -5,7 +5,7 @@ import { logoutAndReload } from "@/commands/logout";
 import { SideMenu } from "@/molecules/side-menu";
 import { Navbar } from "@/molecules/top-navbar";
 import { InteractionType } from "@azure/msal-browser";
-import { useAccount, useMsalAuthentication } from "@azure/msal-react";
+import { useAccount, useMsal, useMsalAuthentication } from "@azure/msal-react";
 import { ReactNode, useEffect, useRef, useState } from "react";
 
 export type OutletProps = {
@@ -21,7 +21,8 @@ export function Outlet({ title, children }: OutletProps): JSX.Element {
   } = useMsalAuthentication(InteractionType.Redirect, {
     scopes: ["User.Read"],
   });
-  const account = useAccount(result?.account ?? {});
+  const { accounts } = useMsal();
+  const account = useAccount(accounts[0] ?? {});
   const [isOpenSideMenu, setIsOpenSideMenu] = useState(false);
   const [isOpenAccountMenu, setIsOpenAccountMenu] = useState(false);
   const menuRef = useRef<HTMLUListElement>(null);
@@ -67,11 +68,12 @@ export function Outlet({ title, children }: OutletProps): JSX.Element {
     await logoutAndReload(tokenRes.accessToken);
   };
 
-  const accountMenu = result?.account ? (
+  const accountMenu = account ? (
     <Menu isOpen={isOpenAccountMenu} ref={menuRef}>
       <MenuLabel>
         <div>
-          <div className="label-large">{result.account.name}</div>
+          <div className="label-large">{account.name}</div>
+          <div className="label-medium">{account.username}</div>
         </div>
       </MenuLabel>
       <MenuButton onClick={logout}>
