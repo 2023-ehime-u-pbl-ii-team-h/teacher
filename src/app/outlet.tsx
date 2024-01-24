@@ -13,13 +13,10 @@ export type OutletProps = {
 };
 
 export function Outlet({ title, children }: OutletProps): JSX.Element {
-  const { login: reLogin, acquireToken } = useMsalAuthentication(
-    InteractionType.Redirect,
-    {
-      scopes: ["User.Read"],
-      prompt: "select_account",
-    },
-  );
+  const { login: reLogin } = useMsalAuthentication(InteractionType.Redirect, {
+    scopes: ["User.Read"],
+    prompt: "select_account",
+  });
   const { instance, accounts } = useMsal();
   const account = useAccount(accounts[0] ?? {});
   const [isOpenSideMenu, setIsOpenSideMenu] = useState(false);
@@ -38,13 +35,6 @@ export function Outlet({ title, children }: OutletProps): JSX.Element {
 
   const logout = async () => {
     if (!account) {
-      return;
-    }
-    const tokenRes = await acquireToken(InteractionType.Redirect, {
-      account,
-      scopes: ["User.Read"],
-    });
-    if (!tokenRes) {
       return;
     }
     await instance.logout();
