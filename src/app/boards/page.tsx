@@ -1,5 +1,4 @@
 import { ExtendedFAB } from "@/atoms/floating-action-button";
-import { Navbar } from "@/molecules/top-navbar";
 import { BoardCardList } from "@/organisms/board-card-list";
 import { Metadata } from "next";
 import Link from "next/link";
