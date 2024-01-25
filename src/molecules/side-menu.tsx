@@ -10,6 +10,7 @@ import Link from "next/link";
 import { useAccessToken } from "@/queries/access-token";
 import { useMe } from "@/queries/me";
 import { postSubject } from "@/commands/post-subject";
+import { deleteSubject } from "@/commands/delete-subject";
 
 export type SideMenuProps = {
   title: string;
@@ -19,8 +20,10 @@ export type SideMenuProps = {
 
 const SubjectMenuItem = ({
   subject: { id, name, boards },
+  accessToken,
 }: {
   subject: Subjects[number];
+  accessToken: string | null;
 }) => (
   <div className={styles.item}>
     <Link href={`/attendances?subject=${id}`} className={styles.labels}>
@@ -34,7 +37,18 @@ const SubjectMenuItem = ({
       </div>
     </Link>
     <div className={styles.leadingButton}>
-      <StandardIconButton icon={<AiOutlineDelete />} alt="削除" />
+      <StandardIconButton
+        icon={<AiOutlineDelete />}
+        alt="削除"
+        onClick={() => {
+          if (!accessToken) {
+            return;
+          }
+          if (confirm(`科目「${name}」を削除しますか? これは復元できません!`)) {
+            deleteSubject(id, accessToken).catch(console.error);
+          }
+        }}
+      />
     </div>
   </div>
 );
@@ -85,7 +99,11 @@ export function SideMenu({
             </Link>
           </div>
           {subjects?.map((subject) => (
-            <SubjectMenuItem key={subject.id} subject={subject} />
+            <SubjectMenuItem
+              key={subject.id}
+              subject={subject}
+              accessToken={accessToken}
+            />
           ))}
           <div className={styles.footer}>
             <FilledButton
