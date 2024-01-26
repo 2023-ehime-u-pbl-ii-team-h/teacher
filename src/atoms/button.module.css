@@ -15,6 +15,9 @@
   );
   color: color-mix(in srgb, var(--md-sys-color-on-surface) 38%, transparent);
 }
+.button:disabled {
+  opacity: 0.38;
+}
 .button:not(:disabled) {
   cursor: pointer;
 }
