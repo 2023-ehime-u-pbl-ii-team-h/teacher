@@ -11,6 +11,8 @@ import { useAccessToken } from "@/queries/access-token";
 import { deleteBoard } from "@/commands/delete-board";
 import { putBoard } from "@/commands/put-board";
 import Link from "next/link";
+import { StandardIconButton } from "@/atoms/icon-button";
+import { MdInfoOutline, MdOutlineDelete, MdOutlineEdit } from "react-icons/md";
 
 function BoardCard({
   now,
@@ -30,31 +32,29 @@ function BoardCard({
   return (
     <div className={`surface on-surface-text ${styles.card}`}>
       <div>
-        <p>{new Date(startFrom).toLocaleString()} から</p>
+        <p>{new Date(startFrom).toLocaleString()}</p>
+        <p> 〜 </p>
         <p>
           {new Date(
             new Date(startFrom).valueOf() +
               (secondsFromBeLateToEnd + secondsFromStartToBeLate) * 1000,
           ).toLocaleString()}{" "}
-          まで
         </p>
       </div>
       <Link href={`/attendances?subject=${subjectId}&board=${id}`}>
-        <TextButton label="開く" />
+        <StandardIconButton icon={<MdInfoOutline />} alt="開く" />
       </Link>
-      <TextButton
-        label="編集"
-        innerProps={{
-          disabled: new Date(startFrom).valueOf() <= now,
-          onClick: onClickEdit,
-        }}
+      <StandardIconButton
+        icon={<MdOutlineEdit />}
+        alt="編集"
+        disabled={new Date(startFrom).valueOf() <= now}
+        onClick={onClickEdit}
       />
-      <TextButton
-        label="削除"
-        innerProps={{
-          disabled: new Date(startFrom).valueOf() <= now,
-          onClick: onClickDelete,
-        }}
+      <StandardIconButton
+        icon={<MdOutlineDelete />}
+        alt="削除"
+        disabled={new Date(startFrom).valueOf() <= now}
+        onClick={onClickDelete}
       />
     </div>
   );
