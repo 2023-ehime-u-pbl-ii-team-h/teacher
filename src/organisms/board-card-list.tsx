@@ -6,13 +6,55 @@ import { FormEvent, useState } from "react";
 import { AttendanceBoards, useBoards } from "@/queries/boards";
 import { Dialog } from "@/molecules/dialog";
 import { OutlinedTextField } from "@/atoms/text-field";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useAccessToken } from "@/queries/access-token";
+import { deleteBoard } from "@/commands/delete-board";
+
+function BoardCard({
+  now,
+  onClickEdit,
+  onClickDelete,
+  board,
+}: {
+  now: number;
+  onClickEdit: () => void;
+  onClickDelete: () => void;
+  board: AttendanceBoards[number];
+}): JSX.Element {
+  const { startFrom, secondsFromBeLateToEnd, secondsFromStartToBeLate } = board;
+  return (
+    <div className={`surface on-surface-text ${styles.card}`}>
+      <span>{startFrom.toLocaleString()}</span>
+      {" → "}
+      <span>
+        {new Date(
+          startFrom.valueOf() +
+            (secondsFromBeLateToEnd + secondsFromStartToBeLate) * 1000,
+        ).toLocaleString()}
+      </span>
+      <TextButton
+        label="編集"
+        innerProps={{
+          disabled: new Date(startFrom).valueOf() <= now,
+          onClick: onClickEdit,
+        }}
+      />
+      <TextButton
+        label="削除"
+        innerProps={{
+          disabled: new Date(startFrom).valueOf() <= now,
+          onClick: onClickDelete,
+        }}
+      />
+    </div>
+  );
+}
 
 export function BoardCardList() {
   const now = Date.now();
 
   const params = useSearchParams();
+  const router = useRouter();
   const subjectId = params.get("subject");
   const accessToken = useAccessToken();
   const { data: boards } = useBoards(
@@ -27,48 +69,33 @@ export function BoardCardList() {
     null,
   );
 
+  if (!subjectId) {
+    router.replace("/");
+    return null;
+  }
+
   function onSubmitEditBoard(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+  }
+  function onDeleteBoard(board: AttendanceBoards[number]) {
+    if (!accessToken || !subjectId) {
+      return;
+    }
+    deleteBoard(accessToken, subjectId, board.id);
   }
 
   return (
     <>
       <div className={styles.cardList}>
-        {boards ? (
-          boards.map((board) => {
-            const {
-              id,
-              startFrom,
-              secondsFromBeLateToEnd,
-              secondsFromStartToBeLate,
-            } = board;
-            return (
-              <div
-                key={id}
-                className={`surface on-surface-text ${styles.card}`}
-              >
-                <span>{startFrom.toLocaleString()}</span>
-                {" → "}
-                <span>
-                  {new Date(
-                    startFrom.valueOf() +
-                      (secondsFromBeLateToEnd + secondsFromStartToBeLate) *
-                        1000,
-                  ).toLocaleString()}
-                </span>
-                <TextButton
-                  label="編集"
-                  innerProps={{
-                    disabled: new Date(startFrom).valueOf() <= now,
-                    onClick: () => setEditTarget(board),
-                  }}
-                />
-              </div>
-            );
-          })
-        ) : (
-          <p>読み込み中…</p>
-        )}
+        {boards?.map((board) => (
+          <BoardCard
+            key={board.id}
+            now={now}
+            board={board}
+            onClickEdit={() => setEditTarget(board)}
+            onClickDelete={() => onDeleteBoard(board)}
+          />
+        )) || <p>読み込み中…</p>}
       </div>
       {editTarget && (
         <Dialog
