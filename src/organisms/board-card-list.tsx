@@ -30,14 +30,14 @@ function BoardCard({
   return (
     <div className={`surface on-surface-text ${styles.card}`}>
       <Link href={`/attendances?subject=${subjectId}&board=${id}`}>
-        <span>{startFrom.toLocaleString()}</span>
-        {" → "}
-        <span>
+        <p>{new Date(startFrom).toLocaleString()} から</p>
+        <p>
           {new Date(
-            startFrom.valueOf() +
+            new Date(startFrom).valueOf() +
               (secondsFromBeLateToEnd + secondsFromStartToBeLate) * 1000,
-          ).toLocaleString()}
-        </span>
+          ).toLocaleString()}{" "}
+          まで
+        </p>
       </Link>
       <TextButton
         label="編集"
