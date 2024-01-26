@@ -9,6 +9,7 @@ import { OutlinedTextField } from "@/atoms/text-field";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useAccessToken } from "@/queries/access-token";
 import { deleteBoard } from "@/commands/delete-board";
+import { putBoard } from "@/commands/put-board";
 
 function BoardCard({
   now,
@@ -76,12 +77,46 @@ export function BoardCardList() {
 
   function onSubmitEditBoard(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    if (!accessToken || !subjectId || !editTarget) {
+      return;
+    }
+
+    const startFrom = (
+      event.currentTarget.elements.namedItem("start_from") as HTMLInputElement
+    ).value;
+    const betweenStartAndBeLate = (
+      event.currentTarget.elements.namedItem(
+        "between_start_and_be_late",
+      ) as HTMLInputElement
+    ).value;
+    const betweenBeLateAndEnd = (
+      event.currentTarget.elements.namedItem(
+        "between_be_late_and_end",
+      ) as HTMLInputElement
+    ).value;
+    const shiftAllAfter = (
+      event.currentTarget.elements.namedItem(
+        "shift_all_after",
+      ) as HTMLInputElement
+    ).value;
+    putBoard(
+      accessToken,
+      subjectId,
+      {
+        id: editTarget.id,
+        startFrom,
+        secondsFromBeLateToEnd: +betweenStartAndBeLate,
+        secondsFromStartToBeLate: +betweenBeLateAndEnd,
+      },
+      shiftAllAfter === "true",
+    ).then(console.error);
   }
   function onDeleteBoard(board: AttendanceBoards[number]) {
     if (!accessToken || !subjectId) {
       return;
     }
-    deleteBoard(accessToken, subjectId, board.id);
+    deleteBoard(accessToken, subjectId, board.id).then(console.error);
   }
 
   return (
