@@ -10,29 +10,35 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useAccessToken } from "@/queries/access-token";
 import { deleteBoard } from "@/commands/delete-board";
 import { putBoard } from "@/commands/put-board";
+import Link from "next/link";
 
 function BoardCard({
   now,
   onClickEdit,
   onClickDelete,
+  subjectId,
   board,
 }: {
   now: number;
   onClickEdit: () => void;
   onClickDelete: () => void;
+  subjectId: string;
   board: AttendanceBoards[number];
 }): JSX.Element {
-  const { startFrom, secondsFromBeLateToEnd, secondsFromStartToBeLate } = board;
+  const { id, startFrom, secondsFromBeLateToEnd, secondsFromStartToBeLate } =
+    board;
   return (
     <div className={`surface on-surface-text ${styles.card}`}>
-      <span>{startFrom.toLocaleString()}</span>
-      {" → "}
-      <span>
-        {new Date(
-          startFrom.valueOf() +
-            (secondsFromBeLateToEnd + secondsFromStartToBeLate) * 1000,
-        ).toLocaleString()}
-      </span>
+      <Link href={`/attendances?subject=${subjectId}&board=${id}`}>
+        <span>{startFrom.toLocaleString()}</span>
+        {" → "}
+        <span>
+          {new Date(
+            startFrom.valueOf() +
+              (secondsFromBeLateToEnd + secondsFromStartToBeLate) * 1000,
+          ).toLocaleString()}
+        </span>
+      </Link>
       <TextButton
         label="編集"
         innerProps={{
@@ -126,6 +132,7 @@ export function BoardCardList() {
           <BoardCard
             key={board.id}
             now={now}
+            subjectId={subjectId}
             board={board}
             onClickEdit={() => setEditTarget(board)}
             onClickDelete={() => onDeleteBoard(board)}

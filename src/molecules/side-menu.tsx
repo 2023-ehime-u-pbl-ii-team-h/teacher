@@ -26,7 +26,7 @@ const SubjectMenuItem = ({
   accessToken: string | null;
 }) => (
   <div className={styles.item}>
-    <Link href={`/attendances?subject=${id}`} className={styles.labels}>
+    <Link href={`/boards?subject=${id}`} className={styles.labels}>
       <div className={styles.stateLayer}>
         <span className="body-large">{name}</span>
         {boards.length !== 0 && (
