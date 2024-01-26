@@ -12,6 +12,6 @@ export const useBoards = (
   props: { subjectId: string; accessToken: string } | null,
 ) =>
   useSWR<AttendanceBoards>(
-    props ? [`/subjects/${props.subjectId}`, props.accessToken] : null,
+    props ? [`/subjects/${props.subjectId}/boards`, props.accessToken] : null,
     fetcher as Fetcher<AttendanceBoards>,
   );
