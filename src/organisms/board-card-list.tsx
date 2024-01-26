@@ -29,7 +29,7 @@ function BoardCard({
     board;
   return (
     <div className={`surface on-surface-text ${styles.card}`}>
-      <Link href={`/attendances?subject=${subjectId}&board=${id}`}>
+      <div>
         <p>{new Date(startFrom).toLocaleString()} から</p>
         <p>
           {new Date(
@@ -38,6 +38,9 @@ function BoardCard({
           ).toLocaleString()}{" "}
           まで
         </p>
+      </div>
+      <Link href={`/attendances?subject=${subjectId}&board=${id}`}>
+        <TextButton label="開く" />
       </Link>
       <TextButton
         label="編集"
